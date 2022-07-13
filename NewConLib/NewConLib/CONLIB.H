@@ -371,7 +371,30 @@ BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background)
     return ret;
 }
 
-BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
+BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars)
+{
+    int cursorX, cursorY;
+    BOOL ret_cur = ConLibGetCursorLocation(&cursorX, &cursorY);
+    if (!ret_cur) return FALSE;
+
+    BOOL ret = TRUE;
+
+    for (int i = 0; i < numChars; i++)
+    {
+        BOOL ret_write = ConLibWriteChar(outChar);
+        if (!ret_write) return FALSE;
+        ret |= ret_write;
+        
+        if (i < numChars - 1)
+        {
+            BOOL ret_set = ConLibSetCursorLocation(cursorX, ++cursorY);
+            if (!ret_set) return FALSE;
+            ret |= ret_set;
+        }
+    }
+
+    return ret;
+}
 
 BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars)
 {
