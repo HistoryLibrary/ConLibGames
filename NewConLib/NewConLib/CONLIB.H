@@ -349,6 +349,10 @@ BOOL    ConLibWriteString(TCHAR  *szString);
 #define _T(x) L##x
 #endif
 
+#ifndef ALLOC
+#define ALLOC(type, n) ((type*)malloc((n) * sizeof(type)))
+#endif
+
 BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background)
 {
     HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -368,7 +372,22 @@ BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background)
 }
 
 BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
-BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
+
+BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars)
+{
+    TCHAR* buf = ALLOC(TCHAR, numChars + 1);
+    if (buf == NULL) return FALSE;
+
+    for (int i = 0; i < numChars; i++)
+    {
+        buf[i] = outChar;
+    }
+    buf[numChars] = 0;
+
+    BOOL ret = ConLibWriteString(buf);
+    free(buf);
+    return ret;
+}
 
 BOOL    ConLibFillScreen(TCHAR  outChar)
 {

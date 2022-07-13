@@ -11,6 +11,7 @@ int main()
     int cursorPosX, cursorPosY;
     ConLibGetCursorLocation(&cursorPosX, &cursorPosY);
     ConLibSetTextColor(FOREGROUND_RED, BACKGROUND_GREEN);
+    ConLibDrawRow(_T('x'), 4);
     ConLibWriteString(_T("你好世界\n"));
     ConLibWriteChar(_T('H'));
     WORD att;
