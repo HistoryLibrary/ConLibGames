@@ -349,7 +349,24 @@ BOOL    ConLibWriteString(TCHAR  *szString);
 #define _T(x) L##x
 #endif
 
-BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background);
+BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    BOOL ret_buf = GetConsoleScreenBufferInfo(hConsoleOutput, &csbi);
+    if (!ret_buf) return FALSE;
+
+    COORD coord;
+    coord.X = 0;
+    coord.Y = 0;
+
+    DWORD written;
+
+    BOOL ret = FillConsoleOutputAttribute(hConsoleOutput, foreground | background, csbi.dwSize.X * csbi.dwSize.Y, coord, &written);
+    return ret;
+}
+
 BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
 BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
 
