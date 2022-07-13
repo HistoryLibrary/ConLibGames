@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# =====EXE=====
+NewConLib.exe
+NewConLib.pdb
