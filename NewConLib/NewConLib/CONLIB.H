@@ -358,8 +358,39 @@ BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr);
 DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize);
 BOOL    ConLibSetTextColor(WORD  foreground, WORD  background);
 BOOL    ConLibSetCursorLocation(int  xCoord, int  yCoord);
-BOOL    ConLibSetTitle(TCHAR* szTitle);
-BOOL    ConLibSetWinSize(int  numRows, int  numCols);
+
+BOOL    ConLibSetTitle(TCHAR* szTitle)
+{
+    return SetConsoleTitle(szTitle);
+}
+
+BOOL    ConLibSetWinSize(int  numRows, int  numCols)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+
+#ifndef DONT_FIX_SET_WIN_SIZE_BUG
+    SMALL_RECT sm1;
+    sm1.Left = 0;
+    sm1.Top = 0;
+    sm1.Right = 1;
+    sm1.Bottom = 1;
+    BOOL ret_win1 = SetConsoleWindowInfo(hConsoleOutput, TRUE, &sm1);
+#endif
+
+    COORD coord;
+    coord.X = numCols;
+    coord.Y = numRows;
+    BOOL ret_buf = SetConsoleScreenBufferSize(hConsoleOutput, coord);
+
+    SMALL_RECT sm;
+    sm.Left = 0;
+    sm.Top = 0;
+    sm.Right = numCols - 1;
+    sm.Bottom = numRows - 1;
+    BOOL ret_win = SetConsoleWindowInfo(hConsoleOutput, TRUE, &sm);
+
+    return ret_buf && ret_win;
+}
 
 BOOL    ConLibWriteChar(TCHAR  outChar)
 {
