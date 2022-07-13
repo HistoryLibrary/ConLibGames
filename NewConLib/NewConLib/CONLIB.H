@@ -357,7 +357,15 @@ BOOL    ConLibGetTextColor(WORD* consoleColor);
 BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr);
 DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize);
 BOOL    ConLibSetTextColor(WORD  foreground, WORD  background);
-BOOL    ConLibSetCursorLocation(int  xCoord, int  yCoord);
+
+BOOL    ConLibSetCursorLocation(int  xCoord, int  yCoord)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD coord;
+    coord.X = xCoord;
+    coord.Y = yCoord;
+    return SetConsoleCursorPosition(hConsoleOutput, coord);
+}
 
 BOOL    ConLibSetTitle(TCHAR* szTitle)
 {

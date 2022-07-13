@@ -3,10 +3,13 @@
 
 int main()
 {
-    ConLibSetWinSize(30, 60);
     ConLibSetTitle(_T("NewConLib Example"));
+    ConLibSetWinSize(30, 60);
+    ConLibSetCursorLocation(2, 2);
     ConLibWriteString(_T("你好世界\n"));
     ConLibWriteChar(_T('H'));
+#ifdef _DEBUG
     system("pause");
+#endif
     return 0;
 }
