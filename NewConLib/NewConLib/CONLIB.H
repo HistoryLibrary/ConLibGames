@@ -11,7 +11,7 @@
 
 // NewConLib version : 1.0
 // Programmer : MingZhao Wu
-// Edit time : 2022/7/13 10:50 AM
+// Edit time : 2022/7/13 12:50 PM
 // usage:
 // #define NEW_CONLIB_IMPLEMENTATION //note: define this macro once!
 // #include "CONLIB.H"
