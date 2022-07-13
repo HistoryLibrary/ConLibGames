@@ -17,6 +17,7 @@ int main()
     ConLibGetTextColor(&att);
     TCHAR readBuf[READ_BUF_SIZE];
     int read = ConLibReadString(readBuf, READ_BUF_SIZE);
+    ConLibFillScreen(_T('s'));
 #ifdef _DEBUG
     system("pause");
 #endif
