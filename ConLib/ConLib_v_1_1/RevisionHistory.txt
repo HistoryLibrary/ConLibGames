@@ -1,0 +1,40 @@
+                  =========================================
+                   Revision History for the ConLib Library
+                  =========================================
+
+
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.0
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+
+-- Initial Revision
+
+-=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-
+
+
+
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.1
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+
+-- Added "ConLibReadInputRecord", which allows processing of keyboard and mouse
+   events.  Also added the enumerated "INPUT_REC" values to the header file so
+   the type of event read from the console's input queue can be determined.
+
+-- Added "ConLibMouseButtonPressed" so mouse button clicks can be detected; this
+   function supports either left or right button detection.
+
+-- Changed "ConLibEnableMessageDisplay" to "ConLibEnableDebugInfo" to better
+   communicate its purpose.
+
+-- Made "ConLibWriteDebugMessage" static to the ConLib.c module (can't see any
+   reason for the client to have access to this function).
+
+-- Added "ConLibGetMouseRecCoords" so X/Y coordinates of a mouse input record
+   can conveniently be determined.
+
+-=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-    -=*=-

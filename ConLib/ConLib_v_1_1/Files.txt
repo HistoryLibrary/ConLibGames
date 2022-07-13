@@ -1,0 +1,32 @@
+// ============================================================================
+// File: Files.txt
+// ============================================================================
+// This contains the list of files contained in the ConLib ZIP file.
+// ============================================================================
+
+*) ReadMe.txt
+   This file explains the purpose of the ConLib library, and how to use it
+   with a Visual C++ compiler.
+
+*) RevisionHistory.txt
+   This file details the series of changes to the ConLib library.
+
+*) Files.txt
+   This file describes all the files contained in the ConLib ZIP file.
+
+*) ConLib.h
+   This is the header file for the ConLib library.  It contains all the
+   version information, preprocessor statements, typedefs, and function
+   prototypes contained in the library.  It also contains the header
+   information for every function in the library.  The header information
+   describes the purpose of the function, its input and output.
+
+*) ConLib9x_v_1_1.zip
+   This is a zip file containing the library files for a Win9x system:
+   -- ConLib9x.lib: The non-debug version of the ConLib library for Win9x.
+   -- ConLib9xdb.lib: The debug version of the ConLib library for Win9x.
+
+*) ConLibNT_v_1_1.zip
+   This is a zip file containing the library files for an NT (4.0) system:
+   -- ConLibNT.lib: The non-debug version of the ConLib library for NT.
+   -- ConLibNTdb.lib: The debug version of the ConLib library for NT.

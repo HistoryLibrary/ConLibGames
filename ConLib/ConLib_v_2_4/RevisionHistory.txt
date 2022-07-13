@@ -1,0 +1,164 @@
+                  =========================================
+                   Revision History for the ConLib Library
+                  =========================================
+
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 2.4
+                         (released August 14, 2002)
+
+-- added macros for more keyboard support:
+   *) ConLibGetAsciiKeyCode
+   *) ConLibCheckControlKey
+   *) ConLibGetVirtualKeyCode
+
+-- several functions were changed from using row/column arguments to using X/Y
+   arguments instead in order to make all size information consistent
+   throughout the library. These functions are:
+   *) ConLibInitialize
+   *) ConLibGetWinSize
+   *) ConLibSetWinSize
+
+-- added the ConLibShowCursor function
+
+-- added the ConLibIsNT function
+
+-- fixed Win2000 bug so that the handling of mouse events is enabled
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 2.3
+                         (released April 14, 2001)
+
+-- Added defined color constants to ConLib.h
+
+-- Added ConLibFlushInputRecords; this function removes any input records from
+   the standard input console's buffer.
+
+-- Enhanced the display of ConLib debug information so that system-defined
+   error strings are displayed.
+
+-- Fixed bug in ConLibReadString; if the caller did not provide a buffer large
+   enough to store text entered from the console, the string was
+   null-terminated and last two characters were thrown away on the assumption
+   they were a CR-LF pair.  Now the function checks the last two characters
+   read; if they are not a CR-LF pair, the string is null-terminated and any
+   remaining text left on the input stream if flushed.
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 2.2
+                         (released October 29, 2000)
+
+-- fixed bug in ConLibMouseButtonPressed; the function was detecting mouse
+   wheel and movement events and mapping them to "button pressed" events; now
+   the if a mouse wheel or movement event occurs, this function will return
+   a value of NO_MOUSE_BUTTON_PRESSED.
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 2.1
+                         (released October 4, 2000)
+
+-- changed prototype for ConLibGetTextColor so that it now takes pointers to
+   the foreground and background colors (freeing the caller from having to
+   perform any bitwise manipulation)
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 2.0
+                         (released October 1, 2000)
+
+-- added ConLibInitialize, which is now necessary to initialize the ConLib
+   library; it establishes the initial console screen size and allocates
+   internal screen handles
+
+-- added "ConLibCheckMouse" event macros
+
+-- added ConLibCopyBufferToScreen and ConLibCopyScreenToBuffer to allow more
+   control of reading/writing portions of the console window
+
+-- added GetEventType so the caller can quickly determine the type of event
+   associated with an INPUT_RECORD
+
+-- added ConLibPauseDisplay so the caller can temporarily suspend updating of
+   the screen while drawing complex graphics
+
+-- added ConLibSetScreenColor, which allows the caller to set the foreground
+   and background colors for the entire console window
+
+-- separate versions for Win9x and NT are no longer supplied, a single set of
+   libraries should work for both platforms (however, single and multi
+   threaded versions are still supported)
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.2.1
+
+-- Modified ConLibMouseButtonPressed so that a right or left mouse button
+   event is returned only if the mouse is not currently moving or "wheeled".
+   Also, the caller can now test for double-clicks.
+
+-- This build does not contain the NT versions of the libraries; those will
+   soon be available in v1.3.
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.2
+
+-- Added stdlib.h to ConLib.h so that the FILE data type is recognized from
+   C++ modules.
+
+-- Fixed bug: ConLibSetTextColor had no effect on ConLibDrawCol
+
+-- The prototype for ConLibReadInputRecord in ConLib.h indicated that the
+   return type was a BOOL.  This is incorrect, it should really be an INT
+   since the return value is used to detect the type of input record that was
+   read from the console's input buffer.
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.1
+
+-- Added "ConLibReadInputRecord", which allows processing of keyboard and mouse
+   events.  Also added the enumerated "INPUT_REC" values to the header file so
+   the type of event read from the console's input queue can be determined.
+
+-- Added "ConLibMouseButtonPressed" so mouse button clicks can be detected; this
+   function supports either left or right button detection.
+
+-- Changed "ConLibEnableMessageDisplay" to "ConLibEnableDebugInfo" to better
+   communicate its purpose.
+
+-- Made "ConLibWriteDebugMessage" static to the ConLib.c module (can't see any
+   reason for the client to have access to this function).
+
+-- Added "ConLibGetMouseRecCoords" so X/Y coordinates of a mouse input record
+   can conveniently be determined.
+
+                                    -=*=-
+
+
+-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-
+                                 Version 1.0
+
+-- Initial Revision
+
+                                    -=*=-
+
+
