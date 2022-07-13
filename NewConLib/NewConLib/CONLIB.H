@@ -360,7 +360,14 @@ BOOL    ConLibSetTextColor(WORD  foreground, WORD  background);
 BOOL    ConLibSetCursorLocation(int  xCoord, int  yCoord);
 BOOL    ConLibSetTitle(TCHAR* szTitle);
 BOOL    ConLibSetWinSize(int  numRows, int  numCols);
-BOOL    ConLibWriteChar(TCHAR  outChar);
+
+BOOL    ConLibWriteChar(TCHAR  outChar)
+{
+    TCHAR szString[2];
+    szString[0] = outChar;
+    szString[1] = 0;
+    return ConLibWriteString(szString);
+}
 
 BOOL    ConLibWriteString(TCHAR* szString)
 {
