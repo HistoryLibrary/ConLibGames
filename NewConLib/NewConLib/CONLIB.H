@@ -355,7 +355,22 @@ BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
 BOOL    ConLibFillScreen(TCHAR  outChar);
 BOOL    ConLibGetTextColor(WORD* consoleColor);
 BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr);
-DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize);
+
+DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize)
+{
+    HANDLE hConsoleInput = GetStdHandle(STD_INPUT_HANDLE);
+    DWORD read;
+    DWORD  nNumberOfCharsToRead = bufSize / sizeof(TCHAR);
+    BOOL ret = ReadConsole(hConsoleInput, charBuf, nNumberOfCharsToRead, &read, NULL);
+    if (ret)
+    {
+        return read;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 BOOL    ConLibSetTextColor(WORD  foreground, WORD  background)
 {
