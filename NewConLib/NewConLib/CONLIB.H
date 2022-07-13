@@ -13,7 +13,7 @@
 // Programmer : MingZhao Wu
 // Edit time : 2022/7/13 10:50 AM
 // usage:
-// #define NEW_CONLIB_IMPLEMENTATION
+// #define NEW_CONLIB_IMPLEMENTATION //note: define this macro once!
 // #include "CONLIB.H"
 
 #ifndef CON_LIB_HEADER
@@ -339,6 +339,36 @@ BOOL    ConLibWriteString(TCHAR  *szString);
 
 #ifdef NEW_CONLIB_IMPLEMENTATION
 
-//TODO
+#ifdef UNICODE
+#define STR_LEN(s) (wcslen(s))
+#else
+#define STR_LEN(s) (strlen(s))
+#endif
+
+#ifndef _T
+#define _T(x) L##x
+#endif
+
+BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background);
+BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
+BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
+BOOL    ConLibFillScreen(TCHAR  outChar);
+BOOL    ConLibGetTextColor(WORD* consoleColor);
+BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr);
+DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize);
+BOOL    ConLibSetTextColor(WORD  foreground, WORD  background);
+BOOL    ConLibSetCursorLocation(int  xCoord, int  yCoord);
+BOOL    ConLibSetTitle(TCHAR* szTitle);
+BOOL    ConLibSetWinSize(int  numRows, int  numCols);
+BOOL    ConLibWriteChar(TCHAR  outChar);
+
+BOOL    ConLibWriteString(TCHAR* szString)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    size_t len = STR_LEN(szString);
+    DWORD written;
+    BOOL ret = WriteConsole(hConsoleOutput, szString, len, &written, NULL);
+    return ret;
+}
 
 #endif

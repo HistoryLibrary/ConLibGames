@@ -4,6 +4,6 @@
     <ClInclude Include="CONLIB.H" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
 </Project>
