@@ -9,6 +9,13 @@
 // to be used on a Win95/Win98/WinNT system.
 // ============================================================================
 
+// NewConLib version : 1.0
+// Programmer : MingZhao Wu
+// Edit time : 2022/7/13 10:50 AM
+// usage:
+// #define NEW_CONLIB_IMPLEMENTATION
+// #include "CONLIB.H"
+
 #ifndef CON_LIB_HEADER
 #define CON_LIB_HEADER
 
@@ -329,3 +336,9 @@ BOOL    ConLibWriteString(TCHAR  *szString);
 
 
 
+
+#ifdef NEW_CONLIB_IMPLEMENTATION
+
+//TODO
+
+#endif
