@@ -354,7 +354,19 @@ BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
 BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
 BOOL    ConLibFillScreen(TCHAR  outChar);
 BOOL    ConLibGetTextColor(WORD* consoleColor);
-BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr);
+
+BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    BOOL ret = GetConsoleScreenBufferInfo(hConsoleOutput, &csbi);
+    if (ret)
+    {
+        *xCoordPtr = csbi.dwCursorPosition.X;
+        *yCoordPtr = csbi.dwCursorPosition.Y;
+    }
+    return ret;
+}
 
 DWORD   ConLibReadString(TCHAR* charBuf, DWORD  bufSize)
 {
