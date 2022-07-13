@@ -13,6 +13,8 @@ int main()
     ConLibSetTextColor(FOREGROUND_RED, BACKGROUND_GREEN);
     ConLibWriteString(_T("你好世界\n"));
     ConLibWriteChar(_T('H'));
+    WORD att;
+    ConLibGetTextColor(&att);
     TCHAR readBuf[READ_BUF_SIZE];
     int read = ConLibReadString(readBuf, READ_BUF_SIZE);
 #ifdef _DEBUG

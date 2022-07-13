@@ -353,7 +353,17 @@ BOOL    ConLibChangeScreenColor(WORD  foreground, WORD  background);
 BOOL    ConLibDrawCol(TCHAR  outChar, int  numChars);
 BOOL    ConLibDrawRow(TCHAR  outChar, int  numChars);
 BOOL    ConLibFillScreen(TCHAR  outChar);
-BOOL    ConLibGetTextColor(WORD* consoleColor);
+
+BOOL    ConLibGetTextColor(WORD* consoleColor)
+{
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    BOOL ret = GetConsoleScreenBufferInfo(hConsoleOutput, &csbi);
+    if (ret)
+    {
+        *consoleColor = csbi.wAttributes;
+    }
+}
 
 BOOL    ConLibGetCursorLocation(int* xCoordPtr, int* yCoordPtr)
 {
